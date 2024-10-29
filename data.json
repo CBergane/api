@@ -1,0 +1,50 @@
+{
+    "objects": [
+        {
+            "id": 2,
+            "name": "Lollo",
+            "value": "123"
+        },
+        {
+            "id": 4,
+            "name": "Franck",
+            "value": "400"
+        },
+        {
+            "id": 7,
+            "name": "Christian",
+            "value": "123"
+        },
+        {
+            "id": 8,
+            "name": "Anders",
+            "value": "500"
+        },
+        {
+            "id": 9,
+            "name": "Frida",
+            "value": "232"
+        },
+        {
+            "id": 10,
+            "name": "Johan",
+            "value": "333"
+        },
+        {
+            "id": 12,
+            "name": "Testing!",
+            "value": "250"
+        },
+        {
+            "id": 13,
+            "name": "Testing!",
+            "value": "250"
+        },
+        {
+            "id": 14,
+            "name": "Testing!",
+            "value": "250"
+        }
+    ],
+    "latest_id": 14
+}
