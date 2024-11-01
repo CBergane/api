@@ -1,11 +1,39 @@
 import tkinter as tk
-from tkinter import messagebox, simpledialog, ttk
+from tkinter import messagebox, simpledialog, ttk, Label
+from PIL import Image, ImageTk, ImageDraw
 import requests
+import os
 
 class APIClientApp:
     def __init__(self, root):
         self.root = root
         self.root.title("API Client - Main Menu")
+        
+         # Skapa en topppanel för att hålla ikonen och huvudmenyn
+        top_frame = ttk.Frame(root)
+        top_frame.pack(fill="x", padx=10, pady=10)
+
+        # Ladda och bearbeta ikonen
+        icon_path = "api.png"
+        if os.path.exists(icon_path):
+            original_icon = Image.open(icon_path).convert("RGBA")
+            resized_icon = original_icon.resize((50, 50), Image.LANCZOS)
+
+            # Skapa en cirkelmask för ikonen
+            mask = Image.new("L", (50, 50), 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0, 50, 50), fill=255)
+
+            # Tillämpa masken för att göra ikonen cirkulär
+            circular_icon = Image.new("RGBA", (50, 50))
+            circular_icon.paste(resized_icon, (0, 0), mask=mask)
+            self.icon_image = ImageTk.PhotoImage(circular_icon)
+
+            # Lägg till ikonen i top_frame
+            icon_label = tk.Label(top_frame, image=self.icon_image)
+            icon_label.pack(side="left", padx=5)
+        else:
+            print("Ikonfilen api.png hittades inte")
         
         # Skapa ett PanedWindow för att dela upp fönstret i två sektioner
         paned_window = ttk.PanedWindow(root, orient="horizontal")
