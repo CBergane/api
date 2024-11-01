@@ -21,29 +21,9 @@
             "value": "500"
         },
         {
-            "id": 9,
-            "name": "Frida",
-            "value": "232"
-        },
-        {
             "id": 10,
             "name": "Johan",
             "value": "333"
-        },
-        {
-            "id": 12,
-            "name": "Testing!",
-            "value": "250"
-        },
-        {
-            "id": 13,
-            "name": "Testing!",
-            "value": "250"
-        },
-        {
-            "id": 14,
-            "name": "Testing!",
-            "value": "250"
         }
     ],
     "latest_id": 14
