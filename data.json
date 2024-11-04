@@ -24,7 +24,12 @@
             "id": 10,
             "name": "Johan",
             "value": "333"
+        },
+        {
+            "id": 15,
+            "name": "Test",
+            "value": "123"
         }
     ],
-    "latest_id": 14
+    "latest_id": 15
 }
