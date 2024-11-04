@@ -87,4 +87,4 @@ def delete(id):
 
 
 if __name__ == "__main__":
-    app.run()  # Starta Flask-applikationen i debug-läge
+    app.run()  # Starta Flask-applikationen
