@@ -14,15 +14,28 @@ Detta projekt är ett CRUD API som byggts med Flask och använder SQLite som den
 
 1. Klona eller ladda ner projektet till din lokala miljö.
 2. Navigera till projektmappen i terminalen.
-3. Installera beroenden:
+3. Skapa en virtuell miljö för projektet:
+    ```bash
+    python -m venv env
+    ```
+4. Aktivera den virtuella miljön:
+    - **På Windows**:
+      ```bash
+      .\env\Scripts\activate
+      ```
+    - **På macOS/Linux**:
+      ```bash
+      source env/bin/activate
+      ```
+5. Installera beroenden:
     ```bash
     pip install -r requirements.txt
     ```
-4. Starta Flask-servern:
+6. Starta Flask-servern:
     ```bash
     python api_server.py
     ```
-5. Öppna klientapplikationen med Tkinter:
+7. Öppna klientapplikationen med Tkinter:
     ```bash
     python client_gui.py
     ```
@@ -40,6 +53,3 @@ Nu är API:et tillgängligt på `http://127.0.0.1:5000` och klientapplikationen 
 
 ## Noteringar
 Export-funktionen (`POST /export`) skapar en JSON-säkerhetskopia från den aktuella datan i SQLite-databasen till en fil (`data.json`).
-
-## Förbättringar
-För att förbättra läsbarheten och konsistensen i endpoints kan vissa utvecklare föredra att sätta alla endpoints under `/<action>` (t.ex. `POST /insert`, `DELETE /delete/<id>`). Detta följer standardpraxis men kan också justeras till att använda root (`/`) tillsammans med specifika HTTP-metoder (t.ex. `POST /`, `DELETE /`) beroende på API-designpreferenser. Det är dock standard att använda explicita endpoints som `/delete/<id>` för tydlighet.
