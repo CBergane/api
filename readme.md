@@ -13,7 +13,14 @@ Detta projekt är ett CRUD API som byggts med Flask och använder SQLite som den
 ## Installation och uppstart
 
 1. Klona eller ladda ner projektet till din lokala miljö.
+
+   För att klona projektet från GitHub, kör följande kommando:
+   ```bash
+   git clone https://github.com/CBergane/api.git
+    ```
+
 2. Navigera till projektmappen i terminalen.
+
 3. Skapa en virtuell miljö för projektet:
     ```bash
     python -m venv env
