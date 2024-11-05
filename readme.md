@@ -59,4 +59,6 @@ Nu är API:et tillgängligt på `http://127.0.0.1:5000` och klientapplikationen 
 - `POST /export` - Exportera data från SQLite till JSON.
 
 ## Noteringar
-Export-funktionen (`POST /export`) skapar en JSON-säkerhetskopia från den aktuella datan i SQLite-databasen till en fil (`data.json`).
+- Export-funktionen (POST /export) skapar en JSON-säkerhetskopia från den aktuella datan i SQLite-databasen till en fil (data.json). Detta kan användas för att säkerhetskopiera datan och lagra den i ett lättillgängligt JSON-format som kan användas utanför applikationen.
+
+- Observera att JSON-filen endast uppdateras när export-funktionen anropas manuellt via klientapplikationen, inte automatiskt vid varje CRUD-operation.
