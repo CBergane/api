@@ -12,6 +12,7 @@ def init_db():
     """Initierar SQLite-databasen och skapar tabellen om den inte redan finns."""
     conn = sqlite3.connect(DB_FILE)  # Anslut till databasen
     cursor = conn.cursor()
+    cursor.execute("PRAGMA journal_mode=WAL")
     cursor.execute('''CREATE TABLE IF NOT EXISTS objects (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         name TEXT NOT NULL,
@@ -80,21 +81,43 @@ def insert():
 @app.route('/update/<int:id>', methods=['PUT'])
 def update(id):
     """Uppdaterar ett befintligt objekt baserat på ID i databasen."""
-    updated_data = request.json  # Hämta data från PUT-begäran
-    name = updated_data.get("name")  # Hämta det uppdaterade namnet om det finns
-    value = updated_data.get("value")  # Hämta det uppdaterade värdet om det finns
+    updated_data = request.json  # Hämta uppdaterad data från klienten
+    name = updated_data.get("name")
+    value = updated_data.get("value")
 
     conn = sqlite3.connect(DB_FILE)  # Anslut till databasen
     cursor = conn.cursor()
-    cursor.execute("UPDATE objects SET name = ?, value = ? WHERE id = ?", (name, value, id))  # Uppdatera objektet med angivet ID
-    conn.commit()
-    rows_updated = cursor.rowcount  # Antalet rader som uppdaterades
-    conn.close()  # Stäng anslutningen
+
+    # Hämta det befintliga objektet från databasen
+    cursor.execute("SELECT name, value FROM objects WHERE id = ?", (id,))
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        return jsonify({"error": "Object not found"}), 404
+
+    # Använd befintliga värden om input är tom
+    current_name, current_value = row
+    name = name if name else current_name
+    value = value if value else current_value
+
+    try:
+        # Uppdatera objektet i databasen
+        cursor.execute(
+            "UPDATE objects SET name = ?, value = ? WHERE id = ?",
+            (name, value, id),
+        )
+        conn.commit()
+        rows_updated = cursor.rowcount  # Kontrollera hur många rader som uppdaterades
+    except sqlite3.IntegrityError as e:
+        return jsonify({"error": str(e)}), 400  # Hantera SQLite-specifika fel
+    finally:
+        conn.close()  # Stäng anslutningen till databasen
 
     if rows_updated > 0:
-        # Om uppdateringen lyckades, returnera det uppdaterade objektet
         return jsonify({"id": id, "name": name, "value": value}), 200
-    return jsonify({"error": "Object not found"}), 404  # Returnera felmeddelande om objektet inte hittades
+    return jsonify({"error": "Object not found"}), 404
+
+
 
 
 @app.route('/delete/<int:id>', methods=['DELETE'])
