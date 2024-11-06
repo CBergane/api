@@ -12,7 +12,7 @@ def init_db():
     """Initierar SQLite-databasen och skapar tabellen om den inte redan finns."""
     conn = sqlite3.connect(DB_FILE)  # Anslut till databasen
     cursor = conn.cursor()
-    cursor.execute("PRAGMA journal_mode=WAL")
+
     cursor.execute('''CREATE TABLE IF NOT EXISTS objects (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         name TEXT NOT NULL,
