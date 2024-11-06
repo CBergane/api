@@ -93,7 +93,7 @@ def update(id):
     row = cursor.fetchone()
     if not row:
         conn.close()
-        return jsonify({"error": "Object not found"}), 404
+        return jsonify({"error": "Ingen användare hittades"}), 404
 
     # Använd befintliga värden om input är tom
     current_name, current_value = row
@@ -115,9 +115,7 @@ def update(id):
 
     if rows_updated > 0:
         return jsonify({"id": id, "name": name, "value": value}), 200
-    return jsonify({"error": "Object not found"}), 404
-
-
+    return jsonify({"error": "Ingen användare hittades"}), 404
 
 
 @app.route('/delete/<int:id>', methods=['DELETE'])
